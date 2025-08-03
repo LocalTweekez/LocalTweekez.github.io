@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -31,15 +32,44 @@
         data.forEach(item => {
           const container = document.createElement('div');
           container.className = 'result-item';
+
+
           const img = document.createElement('img');
           const url = new URL(item.href);
           img.src = 'https://www.google.com/s2/favicons?domain=' + url.hostname;
+          img.alt = (item.company || url.hostname) + ' logo';
+
+          const info = document.createElement('div');
+          info.className = 'result-info';
+
+
           const link = document.createElement('a');
           link.href = item.href;
           link.textContent = item.title;
           link.target = '_blank';
+
+          link.className = 'result-title';
+
+          const company = document.createElement('div');
+          company.className = 'result-company';
+          if (item.company) {
+            company.textContent = item.company;
+          } else {
+            const hostParts = url.hostname.replace('www.', '').split('.');
+            company.textContent = hostParts[hostParts.length - 2] || url.hostname;
+          }
+
+          const desc = document.createElement('div');
+          desc.className = 'result-description';
+          desc.textContent = item.body || '';
+
+          info.appendChild(link);
+          info.appendChild(company);
+          info.appendChild(desc);
+
           container.appendChild(img);
-          container.appendChild(link);
+          container.appendChild(info);
+
           resultsDiv.appendChild(container);
         });
       } catch (e) {

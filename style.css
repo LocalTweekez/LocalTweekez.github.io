@@ -5,8 +5,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   color: #333;
+  padding: 1rem;
 }
 
 .card {
@@ -15,7 +16,8 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .card h2 {
@@ -57,12 +59,45 @@ body {
 
 .result-item {
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
 }
 
 .result-item img {
-  width: 16px;
-  height: 16px;
-  margin-right: 0.5rem;
+  width: 32px;
+  height: 32px;
+  margin-top: 0.25rem;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-title {
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.result-company {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.result-description {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  body {
+    padding: 0.5rem;
+  }
+
 }

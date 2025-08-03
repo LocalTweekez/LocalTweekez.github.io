@@ -1,5 +1,7 @@
 import json
 import time
+
+from urllib.parse import urlparse
 from duckduckgo_search import DDGS
 
 QUERY = (
@@ -10,9 +12,26 @@ OUTPUT_FILE = "search_results.json"
 
 def perform_search():
     ddgs = DDGS()
-    results = list(ddgs.text(QUERY, max_results=10))
+
+    raw_results = list(ddgs.text(QUERY, max_results=10))
+    simplified = []
+    for r in raw_results:
+        parsed = urlparse(r.get("href", ""))
+        host = parsed.hostname or ""
+        parts = host.split(".")
+        company = parts[-2] if len(parts) >= 2 else host
+        simplified.append(
+            {
+                "title": r.get("title"),
+                "href": r.get("href"),
+                "body": r.get("body"),
+                "company": company.capitalize(),
+            }
+        )
+
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
+        json.dump(simplified, f, ensure_ascii=False, indent=2)
+
 
 
 def main():
