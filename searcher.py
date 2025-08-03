@@ -1,5 +1,6 @@
 import json
 import time
+
 from urllib.parse import urlparse
 from duckduckgo_search import DDGS
 
@@ -11,6 +12,7 @@ OUTPUT_FILE = "search_results.json"
 
 def perform_search():
     ddgs = DDGS()
+
     raw_results = list(ddgs.text(QUERY, max_results=10))
     simplified = []
     for r in raw_results:
@@ -29,6 +31,7 @@ def perform_search():
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(simplified, f, ensure_ascii=False, indent=2)
+
 
 
 def main():

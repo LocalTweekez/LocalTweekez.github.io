@@ -59,6 +59,7 @@ body {
 
 .result-item {
   display: flex;
+
   align-items: flex-start;
   margin-bottom: 1rem;
   gap: 0.5rem;
@@ -98,4 +99,5 @@ body {
   body {
     padding: 0.5rem;
   }
+
 }

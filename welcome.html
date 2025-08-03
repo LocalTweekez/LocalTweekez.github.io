@@ -33,6 +33,7 @@
           const container = document.createElement('div');
           container.className = 'result-item';
 
+
           const img = document.createElement('img');
           const url = new URL(item.href);
           img.src = 'https://www.google.com/s2/favicons?domain=' + url.hostname;
@@ -41,10 +42,12 @@
           const info = document.createElement('div');
           info.className = 'result-info';
 
+
           const link = document.createElement('a');
           link.href = item.href;
           link.textContent = item.title;
           link.target = '_blank';
+
           link.className = 'result-title';
 
           const company = document.createElement('div');
@@ -66,6 +69,7 @@
 
           container.appendChild(img);
           container.appendChild(info);
+
           resultsDiv.appendChild(container);
         });
       } catch (e) {
