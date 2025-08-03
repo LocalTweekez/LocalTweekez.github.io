@@ -50,3 +50,19 @@ body {
   color: red;
   margin-top: 0.5rem;
 }
+#results {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.result-item img {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+}

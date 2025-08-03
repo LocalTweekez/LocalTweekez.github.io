@@ -8,6 +8,8 @@
 <body>
   <div class="card">
     <h2>Welcome!</h2>
+    <input type="text" id="searchInput" value="master thesis positions in stockholm for computing engineering students with masters degree in machine learning" />
+    <div id="results"></div>
     <button id="logout">Log out</button>
   </div>
   <script>
@@ -18,6 +20,35 @@
       localStorage.removeItem('loggedIn');
       window.location.href = 'login.html';
     });
+
+    const resultsDiv = document.getElementById('results');
+
+    async function loadResults() {
+      try {
+        const response = await fetch('search_results.json?_=' + Date.now());
+        const data = await response.json();
+        resultsDiv.innerHTML = '';
+        data.forEach(item => {
+          const container = document.createElement('div');
+          container.className = 'result-item';
+          const img = document.createElement('img');
+          const url = new URL(item.href);
+          img.src = 'https://www.google.com/s2/favicons?domain=' + url.hostname;
+          const link = document.createElement('a');
+          link.href = item.href;
+          link.textContent = item.title;
+          link.target = '_blank';
+          container.appendChild(img);
+          container.appendChild(link);
+          resultsDiv.appendChild(container);
+        });
+      } catch (e) {
+        console.error('Failed to load results', e);
+      }
+    }
+
+    loadResults();
+    setInterval(loadResults, 60000);
   </script>
 </body>
 </html>
