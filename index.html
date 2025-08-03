@@ -1,8 +1,16 @@
-<html>
-    <head>
-
-    </head>
-    <body>
-        <h1>hello</h1>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting</title>
+  <script>
+    if (localStorage.getItem('loggedIn') === 'true') {
+      window.location.href = 'welcome.html';
+    } else {
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+</body>
 </html>
