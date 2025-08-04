@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
+  <title>Listings</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="card">
-    <h2>Welcome!</h2>
-    <input type="text" id="searchInput" value="master thesis positions in stockholm for computing engineering students with masters degree in machine learning" />
-    <div id="results"></div>
+    <h2>Listings</h2>
+    <ul id="results"></ul>
     <button id="logout">Log out</button>
   </div>
   <script>
@@ -27,16 +26,16 @@
         window.location.href = 'login.html';
       });
 
-      const resultsDiv = document.getElementById('results');
+      const resultsList = document.getElementById('results');
 
       async function loadResults() {
         try {
           const response = await fetch('search_results.json?_=' + Date.now());
           const data = await response.json();
-          resultsDiv.innerHTML = '';
+          resultsList.innerHTML = '';
           data.forEach(item => {
-            const container = document.createElement('div');
-            container.className = 'result-item';
+            const li = document.createElement('li');
+            li.className = 'result-item';
 
             const img = document.createElement('img');
             const url = new URL(item.href);
@@ -69,10 +68,10 @@
             info.appendChild(company);
             info.appendChild(desc);
 
-            container.appendChild(img);
-            container.appendChild(info);
+            li.appendChild(img);
+            li.appendChild(info);
 
-            resultsDiv.appendChild(container);
+            resultsList.appendChild(li);
           });
         } catch (e) {
           console.error('Failed to load results', e);
